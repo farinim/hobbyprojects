@@ -1,3 +1,6 @@
+package fn.practice;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,8 +24,9 @@ public class PropertyLoader {
 
 	PropertyLoader(){
 		scheduler = Executors.newScheduledThreadPool(1);
-		propertyLocation = "C:/Code/PoC/config.properties";
+		propertyLocation = System.getProperty("java.class.path")+"/resources/config.properties";
 		
+		getClass();
 	}
 
 
@@ -39,6 +43,7 @@ public class PropertyLoader {
 		InputStream inStream = null;
 		try {
 			inStream = new FileInputStream(propertyLocation);
+			//inStream = getClass().getClassLoader().getResourceAsStream(propertyLocation);
 			properties.load(inStream);
 		}catch (IOException e) {
 			e.printStackTrace();
@@ -67,6 +72,7 @@ public class PropertyLoader {
 		OutputStream outStream = null;
 		try {
 			inStream = new FileInputStream(propertyLocation);
+			//inStream = getClass().getClassLoader().getResourceAsStream(propertyLocation);
 			properties.load(inStream);
 
 		}catch (IOException e) {
@@ -102,6 +108,7 @@ public class PropertyLoader {
 
 		try{
 			outStream = new FileOutputStream(propertyLocation);
+			//outStream = getClass().getClassLoader().getResourceAsStream(propertyLocation);
 			properties.store(outStream, null);
 		}catch (IOException e) {
 			e.printStackTrace();
