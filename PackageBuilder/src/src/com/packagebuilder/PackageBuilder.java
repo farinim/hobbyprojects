@@ -53,20 +53,20 @@ public class PackageBuilder {
 		Package pkg5 = new Package("pkg5");
 		Package pkg6 = new Package("pkg6");
 		
-		//Pkg 2 depends on pkg3
+		//Pkg3 depends on pkg4,pkg5 & pkg6
 		List<Package> dependency = new ArrayList<Package>();
 		dependency.add(pkg4);
 		dependency.add(pkg5);
 		dependency.add(pkg6);
 		pkg3.setDependencies(dependency);
 		
-		//Pkg4 depends on pkg2 and pkg3
+		//Pkg2 depends on pkg4 and pkg5
 		List<Package> dependency2 = new ArrayList<Package>();
 		dependency2.add(pkg4);
 		dependency2.add(pkg5);
 		pkg2.setDependencies(dependency2);
 		
-		//Pkg1 depends on pkg4
+		//Pkg1 depends on pkg2 & pkg3
 		List<Package> dependency3 = new ArrayList<Package>();
 		dependency3.add(pkg2);
 		dependency3.add(pkg3);
