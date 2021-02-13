@@ -11,6 +11,9 @@ public class SavingAccount {
         this.rwLock = new ReentrantReadWriteLock();
     }
 
+    ReentrantReadWriteLock getRwLock(){
+        return rwLock;
+    }
     public double balance() {
         rwLock.readLock().lock();
         try {

@@ -13,8 +13,8 @@ public class Transaction {
         this.from = from;
         this.to = to;
         this.amount = amount;
-        fromLock = new ReentrantReadWriteLock();
-        toLock = new ReentrantReadWriteLock();
+        fromLock = from.getRwLock();
+        toLock = to.getRwLock();
     }
 
     public boolean transfer(){
@@ -23,6 +23,7 @@ public class Transaction {
 
             if (from.balance() < amount) {
                 //insufficient balance :abort
+                System.out.println("Low Balance " + from.balance());
                 return false;
             }
         }finally {
@@ -31,10 +32,10 @@ public class Transaction {
         fromLock.writeLock().lock();
         toLock.writeLock().lock();
         try {
-            System.out.println(fromLock.getReadLockCount());
+            /*System.out.println(fromLock.getReadLockCount());
             System.out.println(toLock.getReadHoldCount());
             System.out.println(fromLock.getWriteHoldCount());
-            System.out.println(toLock.getWriteHoldCount());
+            System.out.println(toLock.getWriteHoldCount());*/
             from.debit(amount);
             to.credit(amount);
             return true;
